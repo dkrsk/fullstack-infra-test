@@ -1,0 +1,33 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Test Backend Build
+        run: docker build ./backend -t backend-test:latest
+
+      - name: Test Nginx Config
+        run: docker run --rm -v ${{ github.workspace }}/gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro nginx:alpine nginx -t
+
+  deploy:
+    needs: build-test
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Up Docker Compose
+        run: |
+          docker compose down
+          docker compose up -d --build
+
+      - name: Cleanup old images
+        run: docker image prune -f
