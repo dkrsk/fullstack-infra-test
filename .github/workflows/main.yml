@@ -38,7 +38,7 @@ jobs:
       - name: Up Docker Compose
         run: |
           docker compose down
-          docker compose up -d --build
+          docker compose -p fullstack-infra-test up -d --build
 
       - name: Cleanup old images
         run: docker image prune -f
