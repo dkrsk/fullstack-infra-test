@@ -7,9 +7,9 @@ services:
     image: postgres:15-alpine
     restart: always
     environment:
-      POSTGRES_DB: my_db
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
     networks:
       - backend_net
 
@@ -21,9 +21,9 @@ services:
       - backend_net 
     environment:
       DB_HOST: db
-      DB_NAME: my_db
-      DB_USER: user
-      DB_PASS: password
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
     depends_on:
       - db
 
