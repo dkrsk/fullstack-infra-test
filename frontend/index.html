@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Test Page</h1>
+    <button onclick="fetchData()">Get visits count</button>
+    <p id="result"></p>
+
+    <script>
+        async function fetchData() {
+            const response = await fetch('/api/');
+            const data = await response.json();
+            document.getElementById('result').innerText = 
+                `Message: ${data.message}, Visists: ${data.visits_count}`;
+        }
+    </script>
+</body>
+</html>
