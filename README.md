@@ -41,8 +41,8 @@
 
 1. Клонируйте репозиторий:
    ```
-   git clone https://github.com
-   cd flask-docker-stack
+   git clone https://github.com/dkrsk/fullstack-infra-test
+   cd fullstack-infra-test
 2. Создайте файл .env на основе примера:
     ```
     cp .env.example .env
